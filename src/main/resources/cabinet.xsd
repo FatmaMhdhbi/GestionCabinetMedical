@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Types personnalises -->
+
+    <xs:simpleType name="StatutPatient">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="actif"/>
+            <xs:enumeration value="inactif"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StatutRendezvous">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="confirme"/>
+            <xs:enumeration value="en_attente"/>
+            <xs:enumeration value="termine"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TypeTelephone">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="mobile"/>
+            <xs:enumeration value="fixe"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="NumeroTelephone">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Element principal -->
+
+    <xs:element name="cabinet">
+        <xs:complexType>
+            <xs:sequence>
+
+                <xs:element name="patients">
+                    <xs:complexType>
+                        <xs:sequence>
+
+                            <xs:element name="patient"
+                                        minOccurs="1"
+                                        maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+
+                                        <xs:element name="identite">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="nom" type="xs:string"/>
+                                                    <xs:element name="prenom" type="xs:string"/>
+                                                    <xs:element name="age" type="xs:positiveInteger"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <xs:element name="coordonnees">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="telephone">
+                                                        <xs:complexType>
+                                                            <xs:simpleContent>
+                                                                <xs:extension base="NumeroTelephone">
+                                                                    <xs:attribute name="type" type="TypeTelephone" use="required"/>
+                                                                </xs:extension>
+                                                            </xs:simpleContent>
+                                                        </xs:complexType>
+                                                    </xs:element>
+
+                                                    <xs:element name="email" type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                    </xs:sequence>
+
+                                    <xs:attribute name="id" type="xs:ID" use="required"/>
+                                    <xs:attribute name="statut" type="StatutPatient" use="required"/>
+
+                                </xs:complexType>
+                            </xs:element>
+
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="medecins">
+                    <xs:complexType>
+                        <xs:sequence>
+
+                            <xs:element name="medecin"
+                                        minOccurs="1"
+                                        maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+
+                                        <xs:element name="identite">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="nom" type="xs:string"/>
+                                                    <xs:element name="prenom" type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <xs:element name="specialite">
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="xs:string">
+                                                        <xs:attribute name="code" type="xs:string" use="required"/>
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                    </xs:sequence>
+
+                                    <xs:attribute name="id" type="xs:ID" use="required"/>
+
+                                </xs:complexType>
+                            </xs:element>
+
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="rendezvous">
+                    <xs:complexType>
+                        <xs:sequence>
+
+                            <xs:element name="rendezvous_item"
+                                        minOccurs="1"
+                                        maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+
+                                        <xs:element name="date" type="xs:date"/>
+                                        <xs:element name="heure" type="xs:string"/>
+
+                                        <xs:element name="patient">
+                                            <xs:complexType>
+                                                <xs:attribute name="reference" type="xs:IDREF" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <xs:element name="medecin">
+                                            <xs:complexType>
+                                                <xs:attribute name="reference" type="xs:IDREF" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <xs:element name="salle">
+                                            <xs:complexType>
+                                                <xs:attribute name="numero" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                    </xs:sequence>
+
+                                    <xs:attribute name="id" type="xs:ID" use="required"/>
+                                    <xs:attribute name="statut" type="StatutRendezvous" use="required"/>
+
+                                </xs:complexType>
+                            </xs:element>
+
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+
+            <xs:attribute name="nom" type="xs:string" use="required"/>
+            <xs:attribute name="ville" type="xs:string" use="required"/>
+
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

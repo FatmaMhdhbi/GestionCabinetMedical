@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cabinet nom="Cabinet Medical Central" ville="Tunis">
+
+    <patients>
+
+        <patient id="P1" statut="actif">
+            <identite>
+                <nom>Ben Ali</nom>
+                <prenom>Ahmed</prenom>
+                <age>25</age>
+            </identite>
+
+            <coordonnees>
+                <telephone type="mobile">22123456</telephone>
+                <email>ahmed@gmail.com</email>
+            </coordonnees>
+        </patient>
+
+        <patient id="P2" statut="actif">
+            <identite>
+                <nom>Trabelsi</nom>
+                <prenom>Fatma</prenom>
+                <age>30</age>
+            </identite>
+
+            <coordonnees>
+                <telephone type="mobile">55123456</telephone>
+                <email>fatma@gmail.com</email>
+            </coordonnees>
+        </patient>
+
+        <patient id="P3" statut="inactif">
+            <identite>
+                <nom>Haddad</nom>
+                <prenom>Mohamed</prenom>
+                <age>40</age>
+            </identite>
+
+            <coordonnees>
+                <telephone type="fixe">99123456</telephone>
+                <email>mohamed@gmail.com</email>
+            </coordonnees>
+        </patient>
+
+    </patients>
+
+    <medecins>
+
+        <medecin id="M1">
+            <identite>
+                <nom>Mansour</nom>
+                <prenom>Ali</prenom>
+            </identite>
+            <specialite code="CARD">Cardiologie</specialite>
+        </medecin>
+
+        <medecin id="M2">
+            <identite>
+                <nom>Saidi</nom>
+                <prenom>Amira</prenom>
+            </identite>
+            <specialite code="DERM">Dermatologie</specialite>
+        </medecin>
+
+        <medecin id="M3">
+            <identite>
+                <nom>Jaziri</nom>
+                <prenom>Sami</prenom>
+            </identite>
+            <specialite code="PED">Pediatrie</specialite>
+        </medecin>
+
+    </medecins>
+
+    <rendezvous>
+
+        <rendezvous_item id="R1" statut="confirme">
+            <date>2026-10-20</date>
+            <heure>09:00</heure>
+            <patient reference="P1"/>
+            <medecin reference="M1"/>
+            <salle numero="101"/>
+        </rendezvous_item>
+
+        <rendezvous_item id="R2" statut="en_attente">
+            <date>2026-10-21</date>
+            <heure>10:30</heure>
+            <patient reference="P2"/>
+            <medecin reference="M2"/>
+            <salle numero="102"/>
+        </rendezvous_item>
+
+        <rendezvous_item id="R3" statut="termine">
+            <date>2026-10-22</date>
+            <heure>11:00</heure>
+            <patient reference="P3"/>
+            <medecin reference="M3"/>
+            <salle numero="103"/>
+        </rendezvous_item>
+
+    </rendezvous>
+
+</cabinet>
